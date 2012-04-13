@@ -128,7 +128,7 @@ $(document).ready(function() {
     try{
 
         var socket;  
-        var host = "ws://127.0.0.1/dscrazy/subscribe";  
+        var host = "ws://127.0.0.1:8000/websocket";  
         var socket = new WebSocket(host);
 
         chat('<p class="event">Connecting to Craziness... '+socket.readyState);
