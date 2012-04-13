@@ -1,0 +1,242 @@
+10
+
+dir
+34195
+svn://svn.twistedmatrix.com/svn/Twisted/branches/websocket-4173-2/twisted
+svn://svn.twistedmatrix.com/svn/Twisted
+
+
+
+2010-04-06T09:52:29.395385Z
+28813
+therve
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+bbbe8e31-12d6-0310-92fd-ac37d47ddeeb
+
+test
+dir
+
+enterprise
+dir
+
+plugins
+dir
+
+python
+dir
+
+mail
+dir
+
+manhole
+dir
+
+protocols
+dir
+
+tap
+dir
+
+topfiles
+dir
+
+plugin.py
+file
+
+
+
+
+2012-04-13T01:18:14.789968Z
+714db6e1c30fe6e95843b17befa7c146
+2008-07-29T20:13:54.230116Z
+24441
+thijs
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+7954
+
+__init__.py
+file
+
+
+
+
+2012-04-13T01:18:14.789968Z
+cb407d2957db61684f91202ebe0f560f
+2008-03-22T18:25:16.156424Z
+23010
+radix
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+541
+
+scripts
+dir
+
+internet
+dir
+
+conch
+dir
+
+pair
+dir
+
+words
+dir
+
+vfs
+dir
+
+web2
+dir
+
+copyright.py
+file
+
+
+
+
+2012-04-13T01:18:14.790965Z
+edf630b66cbb9b5bdec65cf92f2571e7
+2010-01-21T21:23:58.332172Z
+28049
+jesstess
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1423
+
+lore
+dir
+
+persisted
+dir
+
+names
+dir
+
+application
+dir
+
+runner
+dir
+
+trial
+dir
+
+_version.py
+file
+
+
+
+
+2012-04-13T01:18:14.790965Z
+ccb6bbefa0f50500012d3636b23727ef
+2009-11-25T22:11:32.565481Z
+27607
+radix
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+133
+
+news
+dir
+
+cred
+dir
+
+web
+dir
+
+spread
+dir
+
