@@ -1,0 +1,3 @@
+txZMQ
+svn+svn://svn.twistedmatrix.com/svn/Twisted/branches/websocket-4173-2
+redis
