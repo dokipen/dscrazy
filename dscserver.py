@@ -64,16 +64,6 @@ class DSCWebSocketHandler(twisted.web.websocket.WebSocketHandler):
         elif msg['type'] == 'chatmsg':
             self.chatter.pub(msg)
 
-class DSCFrontend(twisted.web.resource.Resource):
-    isLeaf = True
-    def __init__(self):
-        f = open('./dscfront.html', 'r')
-        self.html_response = f.read()
-        f.close()
-
-    def render_GET(self, request):
-        return self.html_response
-
 
 chatter = Chatter()
 root = twisted.web.static.File('./static/')
