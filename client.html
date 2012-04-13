@@ -134,23 +134,24 @@ $(document).ready(function() {
         chat('<p class="event">Connecting to Craziness... '+socket.readyState);
 
         socket.onopen = function(){
-       		 //status('Unleash the crazy shit.. '+socket.readyState+' (open)');
-           console.log('Unleash the crazy shit.. '+socket.readyState+' (open)');
+       		 console.log('Unleash the crazy shit.. '+socket.readyState+' (open)');
+           status('Unleash the crazy shit.. '+socket.readyState+' (open)');
+                   
         }
 
         socket.onmessage = function(msg){
-       		 //parse_message(msg.data);
            console.log(msg.data);
+           parse_message(msg.data);
         }
 
         socket.onclose = function(){
-       		 //status('Goodbye suckas! : '+socket.readyState+' (Closed)');
-           console.log('Goodbye suckas! : '+socket.readyState+' (Closed)');
+       		 console.log('Goodbye suckas! : '+socket.readyState+' (Closed)');
+           status('Goodbye suckas! : '+socket.readyState+' (Closed)');
         }			
 
         } catch(exception){
-       		 //fail('Error'+exception);
            console.log('Error'+exception);
+           fail('Error'+exception);
          }
     }
 
