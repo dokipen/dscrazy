@@ -54,15 +54,14 @@ body {
     </div><!-- #container -->
 
 </div>
-<script type="type/javascript">
+<script type="text/javascript">
+//<![CDATA[
 $(document).ready(function() {
+
 	if(!("WebSocket" in window)){
   failed();
 	}else{
-	
-  //connect up.
-  connect();
-  
+	  
   //event handler for return key pressed.
   $('#text').keypress(function(event) {
     if (event.keyCode == '13') {
@@ -74,7 +73,7 @@ $(document).ready(function() {
   $('#disconnect').click(function(){  
       socket.close();  
   });
-
+  
 
   //Move this to its own file sometime
 
@@ -87,7 +86,7 @@ $(document).ready(function() {
       $('#status').html('<p class="failed">' + msg + '</p>');  
   }
   function chat(msg){  
-      $('#chat_log').append('<p class="message">' + msg + '</p>'); 
+      $('#chatLog').append('<p class="message">' + msg + '</p>'); 
   }
 
   function failed() {
@@ -167,8 +166,12 @@ $(document).ready(function() {
     }
 
 
-
+  //connect up.
+  connect();
+}
 });
+
+//]]>
 </script>
 </body>
 </html>​
