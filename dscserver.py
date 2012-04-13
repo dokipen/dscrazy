@@ -1,5 +1,5 @@
 import twisted
-from twisted.web import server, resource, websocket
+from twisted.web import server, resource, websocket, static
 from twisted.internet import reactor
 from txZMQ import ZmqEndpoint, ZmqFactory, ZmqPubConnection, ZmqSubConnection
 
@@ -15,7 +15,7 @@ class Chatter(object):
 		endpoint = 'epgm://0.0.0.0:%s' % port
 		e = ZmqEndpoint(method, endpoint)
 		self.pub_socket = ZmqPubConnection(zf, e)
-	
+
 	def get_port():
 		return self.port
 
@@ -33,7 +33,7 @@ class DSCUser(object):
 		e = ZmqEndpoint(method, endpoint)
 		self.sub_socket = ZmqSubConnection(zf, e)
 		self.sub_socket.gotMessage = self.sub
-	
+
 	def identify(self):
 		identify_message = json.dumps({'type': 'identify', 'body': DSCUser.userid})
 		self.transport.write(identify_message)
@@ -48,10 +48,10 @@ class DSCUser(object):
 class DSCWebSocketHandler(twisted.web.websocket.WebSocketHandler):
 	def __init__(self, transport, dscusers):
 		twisted.web.websocket.WebSocketHandler.__init__(self, transport)
-		
+
 		self.dscuser = DSCUser(self.transport)
 		rediscli.lpush('dscusers', self.dscuser)
-		
+
 
 	def frameReceived(self, frame):
 		msg = json.loads(frame)
@@ -69,14 +69,15 @@ class DSCFrontend(twisted.web.resource.Resource):
 		f = open('./dscfront.html', 'r')
 		self.html_response = f.read()
 		f.close()
-		
+
 	def render_GET(self, request):
 		return self.html_response
 
 
-site = server.Site(DSCFrontend())
-root = twisted.web.static.File('.')
+root = twisted.web.static.File('./static/')
+site = server.Site(root)
 websock = twisted.web.websocket.WebSocketSite(root)
-websock.addHandler('/websocket', DSCWebSocketHandler())
+websock.addHandler('/websocket', DSCWebSocketHandler)
 reactor.listenTCP(8080, site)
+reactor.listenTCP(8000, websock)
 reactor.run()
