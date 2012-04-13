@@ -62,6 +62,8 @@ $(document).ready(function() {
   failed();
 	}else{
 	  
+  $("#crazy_shit").hide();
+  $("#examples").hide();
   //event handler for return key pressed.
   $('#text').keypress(function(event) {
     if (event.keyCode == '13') {
@@ -103,9 +105,13 @@ $(document).ready(function() {
     switch(obj.type)
     {
     case pub:
+      $("#crazy_shit").show();
+      $("#examples").show();
       status("I'm the publisher, I'm fing crazy man!");
       break;
     case sub:
+      $("#crazy_shit").hide();
+      $("#examples").hide();
       chat(obj.body);
       break;
     case votetally:
@@ -116,7 +122,7 @@ $(document).ready(function() {
   }
 
 
-
+  
   function connect(){
     try{
 
