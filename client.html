@@ -135,7 +135,7 @@ $(document).ready(function() {
 
         socket.onopen = function(){
        		 console.log('Unleash the crazy shit.. '+socket.readyState+' (open)');
-           status('Unleash the crazy shit.. '+socket.readyState+' (open)');
+           //status('Unleash the crazy shit.. '+socket.readyState+' (open)');
                    
         }
 
@@ -146,12 +146,12 @@ $(document).ready(function() {
 
         socket.onclose = function(){
        		 console.log('Goodbye suckas! : '+socket.readyState+' (Closed)');
-           status('Goodbye suckas! : '+socket.readyState+' (Closed)');
+           //status('Goodbye suckas! : '+socket.readyState+' (Closed)');
         }			
 
         } catch(exception){
            console.log('Error'+exception);
-           fail('Error'+exception);
+           //fail('Error'+exception);
          }
     }
 
@@ -174,7 +174,7 @@ $(document).ready(function() {
 
 
   //connect up.
-  //connect();
+  connect();
 }
 });
 
