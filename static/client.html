@@ -127,8 +127,8 @@ $(document).ready(function() {
   function connect(){
     try{
 
-        var socket;  
-        var host = "ws://127.0.0.1:8000/websocket";  
+        var socket;
+        var host = "ws://127.0.0.1/";
         var socket = new WebSocket(host);
 
         chat('<p class="event">Connecting to Craziness... '+socket.readyState);
@@ -136,7 +136,6 @@ $(document).ready(function() {
         socket.onopen = function(){
        		 console.log('Unleash the crazy shit.. '+socket.readyState+' (open)');
            //status('Unleash the crazy shit.. '+socket.readyState+' (open)');
-                   
         }
 
         socket.onmessage = function(msg){
@@ -147,7 +146,7 @@ $(document).ready(function() {
         socket.onclose = function(){
        		 console.log('Goodbye suckas! : '+socket.readyState+' (Closed)');
            //status('Goodbye suckas! : '+socket.readyState+' (Closed)');
-        }			
+        }
 
         } catch(exception){
            console.log('Error'+exception);

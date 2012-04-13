@@ -46,7 +46,10 @@ class DSCUser(object):
 
 
 class DSCWebSocketHandler(twisted.web.websocket.WebSocketHandler):
+
     def __init__(self, transport, dscusers):
+        print "fuck yeah!"
+        transport.write('hi there')
         twisted.web.websocket.WebSocketHandler.__init__(self, transport)
 
         self.dscuser = DSCUser(self.transport)
@@ -64,12 +67,15 @@ class DSCWebSocketHandler(twisted.web.websocket.WebSocketHandler):
         elif msg['type'] == 'chatmsg':
             self.chatter.pub(msg)
 
+    def connectionLost(self, reason):
+        print "fml"
+
 
 chatter = Chatter()
 root = twisted.web.static.File('./static/')
 site = server.Site(root)
 websock = twisted.web.websocket.WebSocketSite(root)
-websock.addHandler('/websocket', DSCWebSocketHandler)
+websock.addHandler('/', DSCWebSocketHandler)
 reactor.listenTCP(8080, site)
 reactor.listenTCP(8000, websock)
 reactor.run()
