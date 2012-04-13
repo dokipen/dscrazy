@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="author" content="Embedly" />
+<meta name="description" content="Do Crazy Shit is a broadcast like chat that allows one crazy person to type to multiple viewers who will vote on how crazy that person is.">
+<title>Do Crazy Shit</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<style type="text/css">
+body {
+	font-family:Arial, Helvetica, sans-serif;
+}
+#container{
+	border:5px solid grey;
+	width:800px;
+	margin:0 auto;
+	padding:10px;
+}
+#chatLog{
+	padding:5px;
+	border:1px solid black;
+}
+#chatLog p {
+	margin:0;
+}
+.event {
+	color:#999;
+}
+.failed {
+	color:red;
+}
+.warning{
+	font-weight:bold;
+	color:#CCC;
+}
+</style>
+</head>
+<body>
+<div id="wrapper">
+
+    <div id="container">
+
+        <h1>Do Crazy Shit Time</h1>
+        <div id="status"></div>
+        <div id="chatLog">
+
+        </div><!-- #chatLog -->
+        <p id="examples">e.g. try typing crazy shit!! press return to send.</p>
+
+        <textarea id="crazy_shit" ></textarea>
+        <button id="disconnect">Disconnect</button>
+
+    </div><!-- #container -->
+
+</div>
+<script type="text/javascript">
+//<![CDATA[
+$(document).ready(function() {
+
+	if(!("WebSocket" in window)){
+  failed();
+	}else{
+	  
+  $("#crazy_shit").hide();
+  $("#examples").hide();
+  //event handler for return key pressed.
+  $('#crazy_shit').keypress(function(event) {
+    if (event.keyCode == '13') {
+   		send();
+    }
+  });
+
+  //disconnect button handler
+  $('#disconnect').click(function(){  
+      socket.close();  
+  });
+  
+
+  //Move this to its own file sometime
+
+  //HTML5 Websocket for Do Crazy Shit
+
+  function status(msg){  
+      $('#status').html('<p class="event">' + msg + '</p>');  
+  }
+  function fail(msg){  
+      $('#status').html('<p class="failed">' + msg + '</p>');  
+  }
+  function chat(msg){  
+      $('#chatLog').append('<p class="message">' + msg + '</p>'); 
+  }
+
+  function failed() {
+  $('#chatLog, input, button, #examples, #status, #crazy_shit').fadeOut("fast");
+  $('<p>Silly me, you need a browser that supports WebSockets. How about <a href="http://www.google.com/chrome">Chrome</a>?</p>').appendTo          ('#container');
+  }
+
+
+  function parse_message(result) {
+    //role message - pub,sub
+    //chat message - body
+    //vote tally
+    var obj = jQuery.parseJSON(result);
+    switch(obj.type)
+    {
+    case pub:
+      $("#crazy_shit").show();
+      $("#examples").show();
+      status("I'm the publisher, I'm fing crazy man!");
+      break;
+    case sub:
+      $("#crazy_shit").hide();
+      $("#examples").hide();
+      chat(obj.body);
+      break;
+    case votetally:
+     chat("Vote Tally:" + obj.body);
+    default:
+      
+    }
+  }
+
+
+  
+  function connect(){
+    try{
+
+        var socket;  
+        var host = "ws://127.0.0.1/dscrazy/subscribe";  
+        var socket = new WebSocket(host);
+
+        chat('<p class="event">Connecting to Craziness... '+socket.readyState);
+
+        socket.onopen = function(){
+       		 //status('Unleash the crazy shit.. '+socket.readyState+' (open)');
+           console.log('Unleash the crazy shit.. '+socket.readyState+' (open)');
+        }
+
+        socket.onmessage = function(msg){
+       		 //parse_message(msg.data);
+           console.log(msg.data);
+        }
+
+        socket.onclose = function(){
+       		 //status('Goodbye suckas! : '+socket.readyState+' (Closed)');
+           console.log('Goodbye suckas! : '+socket.readyState+' (Closed)');
+        }			
+
+        } catch(exception){
+       		 //fail('Error'+exception);
+           console.log('Error'+exception);
+         }
+    }
+
+
+    function send(){
+      var text = $('#crazy_shit').val();
+      if(text==""){
+          fail('Need some crazy shit to send.');
+          return ;
+      }
+      try{
+          socket.send(text);
+          status('Sent: '+text)
+      } catch(exception){
+     	fail('Error:' + exception);
+      }
+
+      $('#crazy_shit').val("");
+
+    }
+
+
+  //connect up.
+  //connect();
+}
+});
+
+//]]>
+</script>
+</body>
+</html>​
