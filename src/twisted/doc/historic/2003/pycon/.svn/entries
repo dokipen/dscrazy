@@ -1,58 +1,0 @@
-10
-
-dir
-34195
-svn://svn.twistedmatrix.com/svn/Twisted/branches/websocket-4173-2/doc/historic/2003/pycon
-svn://svn.twistedmatrix.com/svn/Twisted
-
-
-
-2008-08-04T17:54:13.667266Z
-24516
-thijs
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-bbbe8e31-12d6-0310-92fd-ac37d47ddeeb
-
-lore
-dir
-
-pb
-dir
-
-deferex
-dir
-
-tw-deploy
-dir
-
-applications
-dir
-
-intrinsics-lightning
-dir
-
-releasing
-dir
-
-twisted-internet
-dir
-
-conch
-dir
-
-twisted-reality
-dir
-
